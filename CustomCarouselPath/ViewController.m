@@ -27,8 +27,8 @@
 @end
 
 @implementation ViewController {
-    int numberOfItemsInCarousel;
-    NSMutableArray *carouselData;
+    int _numberOfItemsInCarousel;
+    NSMutableArray *_carouselData;
 }
 
 - (void)viewDidLoad
@@ -36,16 +36,23 @@
     [super viewDidLoad];
     
     // Set up the carousel data
-    numberOfItemsInCarousel = 20;
+    _numberOfItemsInCarousel = 10;
     [self setupCarouselViews];
     
     // Create a conveyor belt carousel
     ConveyorBeltCarousel *conveyorBeltCarousel = [[ConveyorBeltCarousel alloc] initWithFrame:self.view.bounds];
     conveyorBeltCarousel.dataSource = self;
+    
+    // Adjust the focus point so we don't see the bottom part of the conveyor belt
     conveyorBeltCarousel.focusPointNormalized = CGPointMake(0.5, 0.7);
-           
+    // Make the momentum last a bit longer
+    conveyorBeltCarousel.frictionCoefficient = 0.8;
+    
+    // Add the view
     [self.view addSubview:conveyorBeltCarousel];
-
+    
+    // Pan up to the 4th item
+    [conveyorBeltCarousel panToItemAtIndex:3 animated:YES withDuration:0.5];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,14 +63,14 @@
 
 - (void)setupCarouselViews
 {
-    carouselData = [[NSMutableArray alloc] init];
-    for (int i=0; i<=numberOfItemsInCarousel; i++) {
+    _carouselData = [[NSMutableArray alloc] init];
+    for (int i=0; i<=_numberOfItemsInCarousel; i++) {
         // Create a view
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width * 0.8, 250)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width * 0.8, 300)];
         
         // Add a subview, coloured depending on its position in the carousel, with a border
         UIView *borderedView = [[UIView alloc] initWithFrame:view.bounds];
-        borderedView.backgroundColor = [UIColor colorWithHue:((float)i)/numberOfItemsInCarousel saturation:1.0 brightness:0.5 alpha:1.0];
+        borderedView.backgroundColor = [UIColor colorWithHue:((float)i)/_numberOfItemsInCarousel saturation:1.0 brightness:0.5 alpha:1.0];
         borderedView.layer.borderWidth = 2.f;
         borderedView.layer.borderColor = [UIColor whiteColor].CGColor;
         borderedView.layer.shouldRasterize = YES;
@@ -76,11 +83,11 @@
         shadowGradient.locations = @[@0, @1];
         shadowGradient.colors = @[(id)[UIColor colorWithWhite:0 alpha:0].CGColor,
                                   (id)[UIColor colorWithWhite:0 alpha:0.9f].CGColor];
-        shadowGradient.frame = borderedView.bounds;
+        shadowGradient.frame = view.bounds;
         [view.layer addSublayer:shadowGradient];
         
         // Add the view to the carousel data
-        [carouselData addObject:view];
+        [_carouselData addObject:view];
     }
 }
 
@@ -88,12 +95,12 @@
 
 -(int)numberOfItemsInCarousel:(SEssentialsCarousel *)carousel
 {
-    return numberOfItemsInCarousel;
+    return _numberOfItemsInCarousel;
 }
 
 -(UIView *)carousel:(SEssentialsCarousel *)carousel itemAtIndex:(int)index
 {
-    return [carouselData objectAtIndex:index];
+    return [_carouselData objectAtIndex:index];
 }
 
 @end

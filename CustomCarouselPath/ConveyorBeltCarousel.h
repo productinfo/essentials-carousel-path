@@ -23,8 +23,8 @@
 
 @interface ConveyorBeltCarousel : SEssentialsCarousel
 
-/** The spacing between items (defaults to 100) */
-@property (nonatomic, assign) float itemSpacing;
+/** The maximum number of items to fit on the front of the conveyor belt (defaults to 5)*/
+@property (nonatomic, assign) int maxNumberOfItemsOnFront;
 
 /** The radius of the rollers on the end of the conveyor belt (defaults to 150)*/
 @property (nonatomic, assign) float rollerRadius;
