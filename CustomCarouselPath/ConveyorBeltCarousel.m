@@ -36,12 +36,17 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        // Set up some default values
         self.panVector = CGPointMake(0, 1);
         self.maxNumberOfItemsOnFront = 5;
         self.rollerRadius = 150.f;
         self.rotateFactor = 0.1f;
         
-        [self calculateBoundaryAndSpacing];        
+        // Calculate the roller boundary and the item spacing
+        [self calculateBoundaryAndSpacing];
+        
+        // Add observers so we can update the boundary and spacing whenever the rollerRadius or
+        // maxNumberOfItemsOnFront are changed
         [self addObserver:self forKeyPath:@"rollerRadius" options:NSKeyValueObservingOptionNew context:nil];
         [self addObserver:self forKeyPath:@"maxNumberOfItemsOnFront" options:NSKeyValueObservingOptionNew context:nil];
     }
@@ -80,6 +85,7 @@
         zOffset = -2 * self.rollerRadius;
         
     } else if (scaledOffset > _rollerBoundary) {
+        // The item is on the roller of the conveyor belt.
         // Work out the angle from the middle of the roller to the item: because we're working
         // in radians, it's just the distance around the circumference divided by the radius
         float angle = (scaledOffset - _rollerBoundary)/self.rollerRadius;
@@ -113,8 +119,20 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqual:@"rollerRadius"] || [keyPath isEqual:@"maxNumberOfItemsOnFront"]) {
+        // If our rollerRadius or maxNumberOfItemsOnFront properties have changed, we need to
+        // recalculate the rollerBoundary and itemSpacing, and redraw the carousel.
         [self calculateBoundaryAndSpacing];
+        [self redrawCarousel];
+    } else {
+        // Otherwise we pass the observations up to the parent
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+-(void)dealloc {
+    // Remove the observers
+    [self removeObserver:self forKeyPath:@"rollerRadius"];
+    [self removeObserver:self forKeyPath:@"maxNumberOfItemsOnFront"];
 }
 
 @end

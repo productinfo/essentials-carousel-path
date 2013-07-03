@@ -37,7 +37,7 @@
     
     // Set up the carousel data
     _numberOfItemsInCarousel = 10;
-    [self setupCarouselViews];
+    [self setupCarouselData];
     
     // Create a conveyor belt carousel
     ConveyorBeltCarousel *conveyorBeltCarousel = [[ConveyorBeltCarousel alloc] initWithFrame:self.view.bounds];
@@ -61,9 +61,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setupCarouselViews
+- (void)setupCarouselData
 {
+    // Create an array of coloured, bordered views to go in the carousel
     _carouselData = [[NSMutableArray alloc] init];
+    
     for (int i=0; i<=_numberOfItemsInCarousel; i++) {
         // Create a view
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width * 0.8, 300)];
@@ -100,7 +102,7 @@
 
 -(UIView *)carousel:(SEssentialsCarousel *)carousel itemAtIndex:(int)index
 {
-    return [_carouselData objectAtIndex:index];
+    return _carouselData[index];
 }
 
 @end
