@@ -1,28 +1,16 @@
-**This project is a work in progress - please come back later to see it in all its glory!**
-
-Shinobi Charts/Grids/Essentials Project Title (Objective-C/Xamarin/Android)
+ShinobiEssentials Conveyor Belt Carousel (Objective-C)
 =====================
 
-Description of project (include link to blog post if there is one)
+This project demonstrates how to build a custom Carousel which imitates a conveyor belt, and attempts to reproduce the effect of the iOS7 Safari tabs screen (which you can see in action [here](http://www.apple.com/ios/ios7/)).
 
 ![Screenshot](screenshot.png?raw=true)
 
 Building the project
 ------------------
 
-In order to build this project you'll need a copy of ShinobiCharts/Grids/Essentials. If you don't have it yet, you can download a free trial from the [ShinobiCharts/Grids/Essentials website](link to appropriate section).
+In order to build this project you'll need a copy of ShinobiEssentials. If you don't have it yet, you can download a free trial from the [ShinobiEssentials website](http://www.shinobicontrols.com/shinobiessentials/).
 
-Once you've downloaded and unzipped ShinobiCharts/Grids/Essentials, open up the project in XCode, and drag ShinobiCharts/Grids/Essentials.embeddedframework from the finder into Xcode's 'frameworks' group, and XCode will sort out all the header and linker paths for you.
-
-**Delete the inappropriate sections (and alter the chart/grid name in the sample code if appropriate):**
-
-If you're using the trial version you'll need to add your license key. To do so, open up ViewController.m and add the following line after the chart is initialised:
-
-    chart.licenseKey=@"your license key";
-
-If you're using the trial version you'll need to add your license key. To do so, open up ViewController.m and add the following line after the grid is initialised:
-
-    grid.licenseKey=@"your license key";
+Once you've downloaded and unzipped ShinobiEssentials, open up the project in XCode, and drag ShinobiEssentials.embeddedframework from the finder into Xcode's 'frameworks' group, and XCode will sort out all the header and linker paths for you.
 
 If you’re using the trial version you’ll need to add your license key. To do so, open up AppDelegate.m, import <ShinobiEssentials/SEssentials.h>, and set the license key inside application:didFinishLaunchingWithOptions: as follows:
 
