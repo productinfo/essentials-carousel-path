@@ -40,19 +40,19 @@
     [self setupCarouselData];
     
     // Create a conveyor belt carousel
-    ConveyorBeltCarousel *conveyorBeltCarousel = [[ConveyorBeltCarousel alloc] initWithFrame:self.view.bounds];
-    conveyorBeltCarousel.dataSource = self;
+    ConveyorBeltCarousel *carousel = [[ConveyorBeltCarousel alloc] initWithFrame:self.view.bounds];
+    carousel.dataSource = self;
     
     // Adjust the focus point so we don't see the bottom part of the conveyor belt
-    conveyorBeltCarousel.focusPointNormalized = CGPointMake(0.5, 0.7);
+    carousel.focusPointNormalized = CGPointMake(0.5, 0.7);
     // Make the momentum last a bit longer
-    conveyorBeltCarousel.frictionCoefficient = 0.8;
+    carousel.frictionCoefficient = 0.8;
     
     // Add the view
-    [self.view addSubview:conveyorBeltCarousel];
+    [self.view addSubview:carousel];
     
     // Pan up to the 4th item
-    [conveyorBeltCarousel panToItemAtIndex:3 animated:YES withDuration:0.5];
+    [carousel panToItemAtIndex:3 animated:YES withDuration:0.5];
 }
 
 - (void)didReceiveMemoryWarning
