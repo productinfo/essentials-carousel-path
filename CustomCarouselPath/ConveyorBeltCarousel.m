@@ -80,8 +80,8 @@
         yOffset = scaledOffset;
         zOffset = 0;
     } else if (scaledOffset < _rollerBoundary + M_PI * self.rollerRadius) {
-        // The item is on the roller of the conveyor belt, because it's offset is less than the
-        // rollerBoundary plus half the diameter of the roller.
+        // The item is on the roller of the conveyor belt, because its offset is less than the
+        // rollerBoundary plus half the circumference of the roller.
         // Work out the angle from the middle of the roller to the item: because we're working
         // in radians, it's just the distance around the circumference divided by the radius
         float angle = (scaledOffset - _rollerBoundary)/self.rollerRadius;
@@ -94,9 +94,9 @@
         zOffset = self.rollerRadius * (cos(angle) - 1);
     } else {
         // The item is on the "back" of the conveyor belt because its offset is greater
-        // than the rollerBoundary plus half the diameter of the roller.
+        // than the rollerBoundary plus half the circumference of the roller.
         // The yOffset we need is the half the length of the conveyor belt, minus scaledOffset.
-        // The length of the belt is 4 * rollerBoundary plus 2 * pi * rollerRadius
+        // The length of the belt is 4 * rollerBoundary + 2 * pi * rollerRadius
         yOffset = 2 * _rollerBoundary + M_PI * self.rollerRadius - scaledOffset;
         
         // The zOffset is just the diameter of the rollers, negative because it's away from us
