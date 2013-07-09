@@ -28,6 +28,7 @@
     // _rollerBoundary is the distance from the middle of the conveyor belt to the middle of the roller,
     // and is calculated so that the conveyor belt fits exactly in the view
     float _rollerBoundary;
+    // _itemSpacing is the distance between the items on the carousel
     float _itemSpacing;
 }
 
@@ -66,26 +67,21 @@
 {
     CATransform3D transform = CATransform3DIdentity;
     
-    // Work out how far from the top middle of the conveyor belt the item should be
+    // Work out how far from the front middle of the conveyor belt the item should be
     float scaledOffset = _itemSpacing * fabsf(offsetFromFocusPoint); 
     
-    // The y offset is based on the scaledOffset, but if that's near or past the end of the conveyor belt,
-    // it needs to be adjusted so it looks like it's rolling round the end
-    float yOffset = scaledOffset;
-    float zOffset = 0;
+    // The y offset is based on the scaledOffset, but if that's near or past the end of the conveyor
+    // belt, it needs to be adjusted so it looks like it's rolling round the end
+    float yOffset, zOffset;
     
-    if (scaledOffset > _rollerBoundary + M_PI * self.rollerRadius) {
-        // The item is on the "back" of the conveyor belt because its offset is greater
-        // than the rollerBoundary plus half the diameter of the roller.
-        // The yOffset we need is the half the length of the conveyor belt, minus scaledOffset.
-        // The length of the belt is 4 * rollerBoundary plus 2 * pi * rollerRadius
-        yOffset = 2 * _rollerBoundary + M_PI * self.rollerRadius - scaledOffset;
-        
-        // The zOffset is just the diameter of the rollers, negative because it's away from us
-        zOffset = -2 * self.rollerRadius;
-        
-    } else if (scaledOffset > _rollerBoundary) {
-        // The item is on the roller of the conveyor belt.
+    if (scaledOffset < _rollerBoundary) {
+        // The item is on the "front" of the conveyor belt, so the yOffset is just scaledOffset,
+        // and the zOffset is 0
+        yOffset = scaledOffset;
+        zOffset = 0;
+    } else if (scaledOffset < _rollerBoundary + M_PI * self.rollerRadius) {
+        // The item is on the roller of the conveyor belt, because its offset is less than the
+        // rollerBoundary plus half the circumference of the roller.
         // Work out the angle from the middle of the roller to the item: because we're working
         // in radians, it's just the distance around the circumference divided by the radius
         float angle = (scaledOffset - _rollerBoundary)/self.rollerRadius;
@@ -93,10 +89,19 @@
         // The y distance above the roller boundary is r * sin(angle)
         yOffset = _rollerBoundary + self.rollerRadius * sin(angle);
         
-        // The z distance away from us is r - r * cos(angle); we need the negative of that to move the item away
-        // from rather than towards us
+        // The z distance away from us is r - r * cos(angle); we need the negative of that to move
+        // the item away from rather than towards us
         zOffset = self.rollerRadius * (cos(angle) - 1);
-    }
+    } else {
+        // The item is on the "back" of the conveyor belt because its offset is greater
+        // than the rollerBoundary plus half the circumference of the roller.
+        // The yOffset we need is the half the length of the conveyor belt, minus scaledOffset.
+        // The length of the belt is 4 * rollerBoundary + 2 * pi * rollerRadius
+        yOffset = 2 * _rollerBoundary + M_PI * self.rollerRadius - scaledOffset;
+        
+        // The zOffset is just the diameter of the rollers, negative because it's away from us
+        zOffset = -2 * self.rollerRadius;        
+    } 
     
     // Sort out negative offsets so they're still negative
     if (offsetFromFocusPoint < 0) {
