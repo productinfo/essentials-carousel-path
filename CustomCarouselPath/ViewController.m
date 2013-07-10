@@ -70,7 +70,7 @@
         // Create a view
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width * 0.8, 300)];
         
-        // Add a subview, coloured depending on its position in the carousel, with a border
+        // Add a subview, colored depending on its position in the carousel, with a border
         UIView *borderedView = [[UIView alloc] initWithFrame:view.bounds];
         borderedView.backgroundColor = [UIColor colorWithHue:((float)i)/_numberOfItemsInCarousel saturation:1.0 brightness:0.5 alpha:1.0];
         borderedView.layer.borderWidth = 2.f;
