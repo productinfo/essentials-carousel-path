@@ -1,7 +1,7 @@
 ShinobiEssentials Conveyor Belt Carousel (Objective-C)
 =====================
 
-This project demonstrates how to build a custom Carousel which imitates a conveyor belt, and attempts to reproduce the effect of the iOS7 Safari tabs screen (which you can see in action [here](http://www.apple.com/ios/ios7/)).
+This project demonstrates how to build a custom Carousel which imitates a conveyor belt, and attempts to reproduce the effect of the iOS7 Safari tabs screen (which you can see in action [here](http://www.apple.com/ios/ios7/)). There's an accompanying [blog post](http://www.shinobicontrols.com/blog/posts/2013/07/15/customizing-your-carousel-path/) explaining how the custom carousel path works. 
 
 ![Screenshot](screenshot.png?raw=true)
 
