@@ -95,7 +95,7 @@
 
 #pragma mark - SEssentialsCarouselDataSource methods
 
--(int)numberOfItemsInCarousel:(SEssentialsCarousel *)carousel
+-(NSUInteger)numberOfItemsInCarousel:(SEssentialsCarousel *)carousel
 {
     return _numberOfItemsInCarousel;
 }
