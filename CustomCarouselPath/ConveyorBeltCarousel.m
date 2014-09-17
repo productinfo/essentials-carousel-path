@@ -63,7 +63,7 @@
     _itemSpacing = _rollerBoundary * 2/self.maxNumberOfItemsOnFront;
 }
 
-- (struct CATransform3D)transformOfItemAtOffset:(float)offsetFromFocusPoint
+- (struct CATransform3D)transformOfItemAtOffset:(CGFloat)offsetFromFocusPoint
 {
     CATransform3D transform = CATransform3DIdentity;
     

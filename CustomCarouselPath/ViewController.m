@@ -100,7 +100,7 @@
     return _numberOfItemsInCarousel;
 }
 
--(UIView *)carousel:(SEssentialsCarousel *)carousel itemAtIndex:(int)index
+-(UIView *)carousel:(SEssentialsCarousel *)carousel itemAtIndex:(NSInteger)index
 {
     return _carouselData[index];
 }
