@@ -12,7 +12,7 @@ In order to build this project you'll need a copy of ShinobiEssentials. If you d
 
 You'll need to add fix the links to the ShinobiEssentials framework and bundle to the project. Open up the project in Xcode, then open your ShinobiEssentials download in finder, and drag ShinobiEssentials.bundle from finder into Xcode's 'frameworks' group. If you haven't run the ShinobiEssentials installer, you'll also need to do the same for ShinobiEssentials.framework.
 
-If you’re using the trial version you’ll need to add your license key. To do so, open up AppDelegate.m, import <ShinobiEssentials/ShinobiEssentials.h>, and set the license key inside application:didFinishLaunchingWithOptions: as follows:
+If you’re using the trial version you’ll need to add your trial key. To do so, open up AppDelegate.m, import <ShinobiEssentials/ShinobiEssentials.h>, and set the trial key inside application:didFinishLaunchingWithOptions: as follows:
 
     #import <ShinobiEssentials/SEssentials.h>
 
@@ -20,7 +20,7 @@ If you’re using the trial version you’ll need to add your license key. To do
 
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
-        [ShinobiEssentials setLicenseKey:@"your license key"];
+        [ShinobiEssentials setTrialKey:@"your trial key"];
         …
     }
 
